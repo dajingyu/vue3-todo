@@ -1,5 +1,4 @@
 <template>
-
   <div class="todo-container">
     <div class="todo-wrap">
       <!-- 头部组件 -->
@@ -10,7 +9,7 @@
         :deleteTaskValue="deleteTaskValue"
         :updateTodo="updateTodo"
       />
-      
+
       <!-- 底部组件 -->
       <Footer
         :todos="todos"
@@ -28,7 +27,7 @@ import List from './components/List.vue';
 
 import { Todo } from './types/todos';
 
-import {saveTodos,readTodos} from './utils/localStorageUtils';
+import { saveTodos, readTodos } from './utils/localStorageUtils';
 export default defineComponent({
   name: 'App',
   components: {
@@ -39,18 +38,20 @@ export default defineComponent({
   setup() {
     // 定义了一个数组 里边的对象是按照接口Todo形式进行规范的
     const state = reactive<{ todos: Todo[] }>({
-      todos: [{
-        name: "徐涛",
-        checked: false,
-        id: "111"
-      }],
+      todos: [
+        {
+          name: '徐涛',
+          checked: false,
+          id: '111',
+        },
+      ],
     });
 
     // 初始化加载
     onMounted(() => {
       setTimeout(() => {
         // state.todos = readTodos();
-      }, 1000);
+      }, 2000);
     });
 
     // 添加数据
@@ -85,11 +86,7 @@ export default defineComponent({
       });
     };
     // 监视todos
-    watch(
-      () => state.todos,
-      saveTodos,
-      {deep:true}
-    );
+    watch(() => state.todos, saveTodos, { deep: true });
 
     return {
       ...toRefs(state),
@@ -99,7 +96,6 @@ export default defineComponent({
       checkAll,
       deleteAllChecked,
     };
-
   },
 });
 </script>
